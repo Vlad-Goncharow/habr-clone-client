@@ -1,0 +1,146 @@
+.sidebar {
+  min-width: 300px;
+  max-width: 300px;
+
+  &__section {
+    margin-bottom: 12px;
+    background: #fff;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 20px 0;
+    padding: 16px 0 12px;
+    border-bottom: 1px solid #d5dddf;
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 20px;
+  }
+
+  @media(max-width: 1024px) {
+    display: none;
+  }
+}
+
+.hab {
+  font-size: .875rem;
+  line-height: 1.5;
+  color: #333;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 24px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__img {
+    width: 36px;
+    height: 36px;
+    position: relative;
+    margin-right: 12px;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__title {
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-decoration: none;
+    line-height: 1.125rem;
+    font-size: .8125rem;
+  }
+
+  &__stats {
+    display: flex;
+    align-items: center;
+
+    span {
+      line-height: 1rem;
+      font-size: .75rem;
+      color: #487284;
+
+      &:first-child {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  &__all {
+    border-top: 1px solid #d5dddf;
+    margin: 0 20px 0;
+    padding: 16px 0;
+    color: #548eaa;
+    font-size: .75rem;
+    line-height: .875rem;
+    text-decoration: none;
+    display: block;
+  }
+}
+
+.item {
+  margin-bottom: 16px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__title {
+    color: #333;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+    word-break: break-all;
+  }
+
+  &__date {
+    font-size: .8125rem;
+    font-weight: 500;
+    line-height: 1rem;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  &__footerItem {
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
+
+    svg {
+      margin-right: 5px;
+      fill: #bdcdd6;
+    }
+
+    span {
+      color: #bdcdd6;
+      font-size: .8125rem;
+    }
+  }
+}

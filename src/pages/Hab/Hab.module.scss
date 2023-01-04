@@ -1,0 +1,35 @@
+.page {
+  background: #f0f0f0;
+  min-height: 100vh;
+}
+
+.wrapper {
+  display: flex;
+  padding-top: 12px;
+
+  @media(max-width: 768px) {
+    padding-top: 0;
+  }
+}
+
+.loader {
+  background: #fff;
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.left {
+  flex: 1;
+  max-width: 780px;
+  margin-right: 16px;
+
+  @media(max-width: 1024px) {
+    margin-right: 0;
+  }
+}
+
+.posts {
+  margin-top: 16px;
+}

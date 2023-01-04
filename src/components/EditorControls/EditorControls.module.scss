@@ -1,0 +1,35 @@
+.buttons {
+  position: absolute;
+  left: 0;
+  z-index: 10;
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__row {
+    min-width: 240px;
+    box-shadow: 0 0 8px rgb(0 0 0 / 20%);
+    border-radius: 3px;
+    background: #fff;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 12px 10px;
+  font-size: 12px;
+  font-size: 13px;
+
+  &:hover {
+    background: #fdf5f5;
+  }
+}

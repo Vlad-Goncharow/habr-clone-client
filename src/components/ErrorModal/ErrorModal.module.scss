@@ -1,0 +1,17 @@
+.wrapper {
+  letter-spacing: 1px;
+  position: fixed;
+  top: 15px;
+  right: -100%;
+  padding: 10px;
+  background: rgb(231, 134, 134);
+  color: #fff;
+  font-size: 13px;
+  border-radius: 4px;
+  z-index: 100;
+
+  &_active {
+    right: 15px;
+    transition: all 0.3s ease-in-out;
+  }
+}

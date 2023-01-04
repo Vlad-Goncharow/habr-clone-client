@@ -1,0 +1,53 @@
+@font-face {
+  font-family: "TypeMates";
+  font-display: swap;
+  src: url("./fonts/TypeMatesCeraRoundProBold.woff") format("woff"), url("./fonts/TypeMatesCeraRoundProBold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "TypeMates";
+  font-display: swap;
+  src: url("./fonts/TypeMatesCeraRoundProRegular.woff") format("woff"), url("./fonts/TypeMatesCeraRoundProRegular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@import './icons.scss';
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing:border-box;
+  outline: none;
+  text-decoration: none;
+  font-family: TypeMates,
+  sans-serif !important;
+  font-weight: 400;
+}
+
+
+.container {
+  padding: 0 24px;
+  max-width: 1096px;
+  margin: 0 auto;
+  box-sizing: content-box;
+  position: relative;
+
+  @media(max-width: 1024px) {
+    max-width: 768px;
+  }
+
+  @media(max-width: 768px) {
+    max-width: 100%;  
+    padding: 0;
+  }
+}
+
+
+
+
+
+
