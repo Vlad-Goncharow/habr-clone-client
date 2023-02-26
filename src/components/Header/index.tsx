@@ -96,7 +96,7 @@ function Header() {
             <div onClick={() => setSideNav(true)} className={s.burger}>
               <span></span>
             </div>
-            <Link to='/flows/all/all' className={s.logo}>
+            <Link to='/flows/all/all/1' className={s.logo}>
               Хабр
             </Link>
 
@@ -142,13 +142,13 @@ function Header() {
       <div className={'container'}>
         <div className={s.row}>
           <nav className={s.left}>
-            <Link to='/flows/all/all'>Все потоки</Link>
-            <Link to='/flows/develop/all'>Разработка</Link>
-            <Link to='/flows/admin/all'>Администрирование</Link>
-            <Link to='/flows/design/all'>Дизайн</Link>
-            <Link to='/flows/management/all'>Менеджмент</Link>
-            <Link to='/flows/marketing/all'>Маркетинг</Link>
-            <Link to='/flows/popsci/all'>Научпоп</Link>
+            <Link to='/flows/all/all/1'>Все потоки</Link>
+            <Link to='/flows/develop/all/1'>Разработка</Link>
+            <Link to='/flows/admin/all/1'>Администрирование</Link>
+            <Link to='/flows/design/all/1'>Дизайн</Link>
+            <Link to='/flows/management/all/1'>Менеджмент</Link>
+            <Link to='/flows/marketing/all/1'>Маркетинг</Link>
+            <Link to='/flows/popsci/all/1'>Научпоп</Link>
           </nav>
           {
             !isMobile &&
@@ -170,8 +170,20 @@ function Header() {
                     {
                       menuIsOpen &&
                       <div ref={menuRef} className={s.person__menu + ' ' + s.menu}>
-                        <Link to='/login' className={s.menu__btn}>Войти</Link>
-                        <Link to='/register' className={s.menu__btn + ' ' + s.menu__btn_register}>Регистрация</Link>
+                        <Link 
+                          to='/login' 
+                          onClick={() => setMenuIsOpen(false)} 
+                          className={s.menu__btn}
+                        >
+                          Войти
+                        </Link>
+                        <Link 
+                          to='/register'
+                          onClick={() => setMenuIsOpen(false)} 
+                          className={s.menu__btn + ' ' + s.menu__btn_register}
+                        >
+                          Регистрация
+                        </Link>
                       </div>
                     }
                   </div>
@@ -197,33 +209,33 @@ function Header() {
 
         {
           dropDown &&
-          <div ref={dropDownRef} className={s.userDropDown}>
-            <div className={s.userDropDown__header}>
+          <div onClick={() => setDropDown(false)} ref={dropDownRef} className={s.userDropDown}>
+            <Link to={`/user/${user.auth?._id}/profile`} className={s.userDropDown__header}>
               <div className={s.user__icon + ' ' + s.user__icon_user}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
                   <path d="M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
                   <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
                 </svg>
               </div>
-              <Link to={`/user/${user.auth?._id}/profile`}>{user.auth?.nickName}</Link>
-            </div>
+              <span >{user.auth?.nickName}</span>
+            </Link>
             <ul className={s.userDropDown__list}>
               <li>
-                <Link onClick={() => setDropDown(false)} to={`/user/${user.auth?._id}/posts`}>Статьи</Link>
+                <Link to={`/user/${user.auth?._id}/posts/1`}>Статьи</Link>
               </li>
               <li>
-                <Link onClick={() => setDropDown(false)} to={`/user/${user.auth?._id}/comments`}>Коментарии</Link>
+                <Link to={`/user/${user.auth?._id}/comments/1`}>Коментарии</Link>
               </li>
               <li>
-                <Link onClick={() => setDropDown(false)} to={`/user/${user.auth?._id}/favorites`}>Закладки</Link>
+                <Link to={`/user/${user.auth?._id}/favorites/1`}>Закладки</Link>
               </li>
               <li>
-                <Link onClick={() => setDropDown(false)} to='/hab/create'>Создать Хаб</Link>
+                <Link to='/hab/create'>Создать Хаб</Link>
               </li>
             </ul>
             <ul className={s.userDropDown__list}>
               <li>
-                <Link onClick={() => setDropDown(false)} to='/user/settings'>
+                <Link to='/user/settings'>
                   <svg className='setting-icon' xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
                     <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.723 1.723 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37 1 .608 2.296.07 2.572-1.065Z" />
                     <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
@@ -234,10 +246,10 @@ function Header() {
                 </Link>
               </li>
               <li onClick={logout}>
-                <Link onClick={() => setDropDown(false)} to='/flows/all/all'>
+                <Link to='/flows/all/all/1'>
                   <svg className='exit-icon' xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd" d="M14.4 17.4a.6.6 0 0 1-.6.6H4.2a.6.6 0 0 1-.6-.6V6.6a.6.6 0 0 1 .6-.6h9.6a.6.6 0 0 1 .6.6V9a.6.6 0 1 0 1.2 0V6.6a1.8 1.8 0 0 0-1.8-1.8H4.2a1.8 1.8 0 0 0-1.8 1.8v10.8a1.8 1.8 0 0 0 1.8 1.8h9.6a1.8 1.8 0 0 0 1.8-1.8V15a.6.6 0 1 0-1.2 0v2.4Z" clip-rule="evenodd" />
-                    <path fill-rule="evenodd" d="M21.425 12.424a.6.6 0 0 0 0-.85l-3.6-3.6a.6.6 0 0 0-.85.85l2.577 2.576H9a.6.6 0 1 0 0 1.2h10.552l-2.576 2.575a.6.6 0 1 0 .85.85l3.6-3.6Z" clip-rule="evenodd" />
+                    <path fillRule="evenodd" d="M14.4 17.4a.6.6 0 0 1-.6.6H4.2a.6.6 0 0 1-.6-.6V6.6a.6.6 0 0 1 .6-.6h9.6a.6.6 0 0 1 .6.6V9a.6.6 0 1 0 1.2 0V6.6a1.8 1.8 0 0 0-1.8-1.8H4.2a1.8 1.8 0 0 0-1.8 1.8v10.8a1.8 1.8 0 0 0 1.8 1.8h9.6a1.8 1.8 0 0 0 1.8-1.8V15a.6.6 0 1 0-1.2 0v2.4Z" clipRule="evenodd" />
+                    <path fillRule="evenodd" d="M21.425 12.424a.6.6 0 0 0 0-.85l-3.6-3.6a.6.6 0 0 0-.85.85l2.577 2.576H9a.6.6 0 1 0 0 1.2h10.552l-2.576 2.575a.6.6 0 1 0 .85.85l3.6-3.6Z" clipRule="evenodd" />
                   </svg>
                   <span>Выход</span>
                 </Link>
@@ -271,33 +283,33 @@ function Header() {
                 </div>
               </div>
             :
-              <div ref={sideAuthRef} className={s.userDropDown}>
-                <div className={s.userDropDown__header}>
+              <div onClick={() => setSideAuth(false)} ref={sideAuthRef} className={s.userDropDown}>
+                <Link to={`/user/${user.auth?._id}/profile`} className={s.userDropDown__header}>
                   <div className={s.user__icon + ' ' + s.user__icon_user}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
                       <path d="M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
                       <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
                     </svg>
                   </div>
-                  <Link to={`/user/${user.auth?._id}/profile`}>{user.auth?.nickName}</Link>
-                </div>
+                  <span >{user.auth?.nickName}</span>
+                </Link>
                 <ul className={s.userDropDown__list}>
                   <li>
-                    <Link onClick={() => setSideAuth(false)} to={`/user/${user.auth?._id}/posts`}>Статьи</Link>
+                    <Link to={`/user/${user.auth?._id}/posts/1`}>Статьи</Link>
                   </li>
                   <li>
-                    <Link onClick={() => setSideAuth(false)} to={`/user/${user.auth?._id}/comments`}>Коментарии</Link>
+                    <Link to={`/user/${user.auth?._id}/comments/1`}>Коментарии</Link>
                   </li>
                   <li>
-                    <Link onClick={() => setSideAuth(false)} to={`/user/${user.auth?._id}/favorites`}>Закладки</Link>
+                    <Link to={`/user/${user.auth?._id}/favorites/1`}>Закладки</Link>
                   </li>
                   <li>
-                    <Link onClick={() => setSideAuth(false)} to='/hab/create'>Создать Хаб</Link>
+                    <Link to='/hab/create'>Создать Хаб</Link>
                   </li>
                 </ul>
                 <ul className={s.userDropDown__list}>
                   <li>
-                    <Link onClick={() => setSideAuth(false)} to='/user/settings'>
+                    <Link  to='/user/settings'>
                       <svg className='setting-icon' xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.723 1.723 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37 1 .608 2.296.07 2.572-1.065Z" />
                         <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
@@ -308,10 +320,10 @@ function Header() {
                     </Link>
                   </li>
                   <li onClick={logout}>
-                    <Link onClick={() => setSideAuth(false)} to='/flows/all/all'>
+                    <Link to='/flows/all/all/1'>
                       <svg className='exit-icon' xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M14.4 17.4a.6.6 0 0 1-.6.6H4.2a.6.6 0 0 1-.6-.6V6.6a.6.6 0 0 1 .6-.6h9.6a.6.6 0 0 1 .6.6V9a.6.6 0 1 0 1.2 0V6.6a1.8 1.8 0 0 0-1.8-1.8H4.2a1.8 1.8 0 0 0-1.8 1.8v10.8a1.8 1.8 0 0 0 1.8 1.8h9.6a1.8 1.8 0 0 0 1.8-1.8V15a.6.6 0 1 0-1.2 0v2.4Z" clip-rule="evenodd" />
-                        <path fill-rule="evenodd" d="M21.425 12.424a.6.6 0 0 0 0-.85l-3.6-3.6a.6.6 0 0 0-.85.85l2.577 2.576H9a.6.6 0 1 0 0 1.2h10.552l-2.576 2.575a.6.6 0 1 0 .85.85l3.6-3.6Z" clip-rule="evenodd" />
+                        <path fillRule="evenodd" d="M14.4 17.4a.6.6 0 0 1-.6.6H4.2a.6.6 0 0 1-.6-.6V6.6a.6.6 0 0 1 .6-.6h9.6a.6.6 0 0 1 .6.6V9a.6.6 0 1 0 1.2 0V6.6a1.8 1.8 0 0 0-1.8-1.8H4.2a1.8 1.8 0 0 0-1.8 1.8v10.8a1.8 1.8 0 0 0 1.8 1.8h9.6a1.8 1.8 0 0 0 1.8-1.8V15a.6.6 0 1 0-1.2 0v2.4Z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M21.425 12.424a.6.6 0 0 0 0-.85l-3.6-3.6a.6.6 0 0 0-.85.85l2.577 2.576H9a.6.6 0 1 0 0 1.2h10.552l-2.576 2.575a.6.6 0 1 0 .85.85l3.6-3.6Z" clipRule="evenodd" />
                       </svg>
                       <span>Выход</span>
                     </Link>
@@ -327,14 +339,14 @@ function Header() {
         sideNav &&
         <div className={s.overlay}>
           <div ref={sideNavRef} className={s.sideInfo}>
-            <nav className={s.left}>
-              <Link onClick={() => setSideNav(false)} to='/flows/all/all'>Все потоки</Link>
-              <Link onClick={() => setSideNav(false)} to='/flows/develop/all'>Разработка</Link>
-              <Link onClick={() => setSideNav(false)} to='/flows/admin/all'>Администрирование</Link>
-              <Link onClick={() => setSideNav(false)} to='/flows/design/all'>Дизайн</Link>
-              <Link onClick={() => setSideNav(false)} to='/flows/management/all'>Менеджмент</Link>
-              <Link onClick={() => setSideNav(false)} to='/flows/marketing/all'>Маркетинг</Link>
-              <Link onClick={() => setSideNav(false)} to='/flows/popsci/all'>Научпоп</Link>
+            <nav onClick={() => setSideNav(false)}  className={s.left}>
+              <Link to='/flows/all/all/1'>Все потоки</Link>
+              <Link to='/flows/develop/all/1'>Разработка</Link>
+              <Link to='/flows/admin/all/1'>Администрирование</Link>
+              <Link to='/flows/design/all/1'>Дизайн</Link>
+              <Link to='/flows/management/all/1'>Менеджмент</Link>
+              <Link to='/flows/marketing/all/1'>Маркетинг</Link>
+              <Link to='/flows/popsci/all/1'>Научпоп</Link>
             </nav>
           </div>
         </div>

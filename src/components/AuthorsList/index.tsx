@@ -30,7 +30,7 @@ const AuthorsList: React.FC<AuthorsListProps> = ({ authors }) => {
                     <img src={`${process.env.REACT_APP_SERVER_URL}${user.avatar}`} alt="" />
                   </div>
                   <div className={s.item__info}>
-                    <Link to={`/user/${user._id}/profile`} className={s.item__title}>{user.nickName}</Link>
+                    <Link to={`/user/${user._id}/profile/`} className={s.item__title}>{user.nickName}</Link>
                     <p className={s.item__descr}>{user.description}</p>
                   </div>
                 </div>
@@ -42,7 +42,6 @@ const AuthorsList: React.FC<AuthorsListProps> = ({ authors }) => {
               </div>
             )
           }
-
         </div>
       </div>
     :

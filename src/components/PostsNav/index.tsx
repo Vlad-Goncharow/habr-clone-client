@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from 'react'
-import { Link,useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
-import s from './PostsNav.module.scss'
 import classNames from 'classnames'
+import s from './PostsNav.module.scss'
 
 const PostCategories = [
   {
@@ -25,14 +25,15 @@ const PostCategories = [
     typeEng: 'popsci'
   }
 ]
-
 interface PostsNavProps{
-  handleChange: (event: ChangeEvent<HTMLInputElement>) => void
+  setValue: any
+  value: String | null
+  type:String
 }
 
-const PostsNav: React.FC<PostsNavProps> = ({ handleChange }) => {
+const PostsNav: React.FC<PostsNavProps> = ({ setValue, value, type }) => {
   // ======== posts params
-  const {category,type} = useParams()
+  const { category} = useParams()
   // ======== posts params
 
   // ======== check current category
@@ -51,6 +52,12 @@ const PostsNav: React.FC<PostsNavProps> = ({ handleChange }) => {
   }
   // ======== check current category
 
+  // ======== change input
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value)
+  }
+  // ======== change input
+
   return (
     <div className={s.wrapper}>
       <>
@@ -58,7 +65,7 @@ const PostsNav: React.FC<PostsNavProps> = ({ handleChange }) => {
       </>
       <div className={s.category}>
         <Link
-          to={`/flows/${category}/all`}
+          to={`/flows/${category}/all/1`}
           className={classNames(s.category__item, {
             [s.category__item_active]: type === 'all'
           })}
@@ -66,7 +73,7 @@ const PostsNav: React.FC<PostsNavProps> = ({ handleChange }) => {
           Статьи
         </Link>
         <Link
-          to={`/flows/${category}/news`}
+          to={`/flows/${category}/news/1`}
           className={classNames(s.category__item, {
             [s.category__item_active]: type === 'news'
           })}
@@ -75,7 +82,7 @@ const PostsNav: React.FC<PostsNavProps> = ({ handleChange }) => {
           Новости
         </Link>
         <Link
-          to={`/flows/${category}/habs`}
+          to={`/flows/${category}/habs/1`}
           className={classNames(s.category__item, {
             [s.category__item_active]: type === 'habs'
           })}
@@ -83,7 +90,7 @@ const PostsNav: React.FC<PostsNavProps> = ({ handleChange }) => {
           Хабы
         </Link>
         <Link
-          to={`/flows/${category}/authors`}
+          to={`/flows/${category}/authors/1`}
           className={classNames(s.category__item, {
             [s.category__item_active]: type === 'authors'
           })}
@@ -96,7 +103,7 @@ const PostsNav: React.FC<PostsNavProps> = ({ handleChange }) => {
         ?
           <div className={s.search}>
             <form action="" className={s.search__form}>
-              <input type="text" placeholder='Пойск' onChange={handleChange} className={s.search__input}/>
+              <input type="text" placeholder='Пойск' value={String(value)} onChange={handleChange} className={s.search__input}/>
               <button className={s.search__btn}>
                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="32" viewBox="0 0 32 32"><title>search</title><path d="M31.008 27.231l-7.58-6.447c-0.784-0.705-1.622-1.029-2.299-0.998 1.789-2.096 2.87-4.815 2.87-7.787 0-6.627-5.373-12-12-12s-12 5.373-12 12 5.373 12 12 12c2.972 0 5.691-1.081 7.787-2.87-0.031 0.677 0.293 1.515 0.998 2.299l6.447 7.58c1.104 1.226 2.907 1.33 4.007 0.23s0.997-2.903-0.23-4.007zM12 20c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z"></path></svg>
               </button>

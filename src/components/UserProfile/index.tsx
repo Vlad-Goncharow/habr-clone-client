@@ -1,14 +1,45 @@
 import React from 'react'
-import { HabType } from '../../Types/HabType'
-import { UserType } from '../../Types/UserType'
-import UserHab from '../UserHab'
 import s from './UserProfile.module.scss'
+import { UserType } from '../../Types/UserType'
+import { HabType } from '../../Types/HabType'
+import UserHab from '../UserHab'
+import axios from '../../axios'
+import { useNavigate, useParams } from 'react-router-dom'
+import { openModal } from '../../Redux/Slices/ErrorModalSlice'
+import { useAppDispatch } from '../../Hooks/useAppDispatch'
 
-interface UserProfileProps{
-  user:UserType
-}
+const UserProfile: React.FC = () => {
+  // ======== user
+  const [user, setUser] = React.useState<UserType | null>(null)
+  // ======== user
 
-const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
+  // ======== user id
+  const { id } = useParams()
+  // ======== user id
+
+  // ======== dispatch
+  const dispatch = useAppDispatch()
+  // ======== dispatch1
+
+  // ======== navigate
+  const navigate = useNavigate()
+  // ======== navigate
+
+  // ======== load user
+  const loadUser = async () => {
+    try {
+      const { data } = await axios.get(`/user/profile/${id}`)
+      setUser(data)
+    } catch (e) {
+      dispatch(openModal('При загрузке пользователя произошла ошибка!'))
+      navigate(-1)
+    }
+  }
+  React.useEffect(() => {
+    loadUser()
+  }, [id])
+  // ======== load user
+
   return (
     <div className={s.wrapper}>
       <div className={s.item}>
@@ -17,7 +48,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
         </h2>
         <div className={s.habs}>
           {
-            user.habSubscribers.length > 0 ?
+            user !== null && user.habSubscribers.length > 0 ?
             user.habSubscribers.map((el: HabType) =>
               <UserHab key={`${el._id}`} hab={el} />
             ) :

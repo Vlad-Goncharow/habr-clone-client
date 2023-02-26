@@ -7,8 +7,16 @@ import {
   useLocation
 } from "react-router-dom";
 import ErrorModal from './components/ErrorModal';
+import HabsList from './components/HabsList';
 
 import Header from './components/Header';
+import HomeAuthorsList from './components/HomeAuthorsList';
+import HomePosts from './components/HomePosts';
+import UserComments from './components/UserComments';
+import UserFavoritePosts from './components/UserFavoritePosts';
+import UserPosts from './components/UserPosts';
+import UserProfile from './components/UserProfile';
+import UserSubs from './components/UserSubs';
 import { useAppDispatch } from './Hooks/useAppDispatch';
 import Create from './pages/Create';
 import Hab from './pages/Hab';
@@ -37,7 +45,7 @@ function App() {
 
   React.useEffect(() => {
     if(location.pathname === '/'){
-      navigate('/flows/all/all')
+      navigate('/flows/all/all/1')
     }
   },[])
 
@@ -69,10 +77,20 @@ function App() {
         <Route path='/all' element={<Posts />} />
         <Route path='/post/create' element={<Create />} />
         <Route path='/search' element={<Search />} />
-        <Route path='/flows/:category/:type' element={<Posts />} />
+        <Route path='/flows/:category/' element={<Posts />} >
+          <Route path=':type/:page' element={<HomePosts />} />
+          <Route path='habs/:page' element={<HabsList />} />
+          <Route path='authors/:page' element={<HomeAuthorsList />} />
+        </Route>
         <Route path='/hab/create' element={<HabCreate />} />
         <Route path='/hab/:habId/:type' element={<Hab />} />
-        <Route path='/user/:id/:category' element={<UserPage />} />
+        <Route path='/user/:id/' element={<UserPage />}>
+          <Route path='profile' element={<UserProfile />} />
+          <Route path='posts/:page' element={<UserPosts />} />
+          <Route path='comments/:page' element={<UserComments />} />
+          <Route path='favorites/:page' element={<UserFavoritePosts />} />
+          <Route path=':category/:page' element={<UserSubs />} />
+        </Route>
         <Route path='/user/settings' element={<UserSettings />} />
       </Routes>
     </>

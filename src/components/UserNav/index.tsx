@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import React from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useAppDispatch } from '../../Hooks/useAppDispatch'
 import { useAppSelector } from '../../Hooks/useAppSelector'
 import { fetchUserSubscribe, fetchUserUnSubscribe } from '../../Redux/Slices/AuthSlice'
@@ -48,7 +48,7 @@ const UserNav: React.FC<UserNavProps> = ({user}) => {
   // ======== auth user
 
   // ======== user category
-  const {category} = useParams()
+  const location = useLocation();
   // ======== user category
 
   // ======== is user subscribed 
@@ -130,8 +130,11 @@ const UserNav: React.FC<UserNavProps> = ({user}) => {
       <div className={s.category}>
         {
           categories.map((el: categoriesType) => 
-            <Link key={`${el.categoryEng}`} to={`/user/${user?._id}/${el.categoryEng}`} className={classNames(s.category__item,{
-              [s.category__item_active]: el.categoryEng === category
+            <Link 
+              key={`${el.categoryEng}`} 
+              to={`/user/${user?._id}/${el.categoryEng}/${el.categoryEng !== 'profile' ? 1 : ''}`} 
+              className={classNames(s.category__item,{
+                [s.category__item_active]: el.categoryEng === location.pathname.split('/')[location.pathname.split('/').length - 2]
             })}>{el.categoryRu}</Link>
           )
         }

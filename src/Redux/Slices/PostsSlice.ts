@@ -5,6 +5,7 @@ import { PostType } from '../../Types/PostType';
 interface PostState {
   posts:{
     items:PostType[] | [],
+    length:Number,
     loading:Boolean
   }
 }
@@ -12,13 +13,14 @@ interface PostState {
 const initialState:PostState = {
   posts:{
     items:[],
+    length: 0,
     loading:true
   }
 }
 
 export const fetchGetAllPosts = createAsyncThunk('posts/fetchGetAllPosts', async (params:any,{rejectWithValue}) => {
   try {
-      const { data } = await axios.get(`/posts/${params.category}/${params.type}`)
+    const { data } = await axios.get(`/posts/${params.category}/${params.type}/${params.page}`)
       return data 
     } catch(err:any) {
       if (!err.response) {
@@ -30,7 +32,7 @@ export const fetchGetAllPosts = createAsyncThunk('posts/fetchGetAllPosts', async
 
 export const fetchUserPosts = createAsyncThunk('posts/fetchUserPosts', async (params:any,{rejectWithValue}) => {
   try {
-    const { data } = await axios.get(`/user/posts/${params.id}`)
+    const { data } = await axios.get(`/user/posts/${params.id}/${params.page}`)
     return data 
   } catch(err:any) {
     if (!err.response) {
@@ -75,7 +77,8 @@ const PostSlice = createSlice({
       state.posts.loading = true
     })
     builder.addCase(fetchGetAllPosts.fulfilled, (state,action) => {
-      state.posts.items = action.payload
+      state.posts.items = action.payload.posts
+      state.posts.length = action.payload.length
       state.posts.loading = false
     })
 
@@ -83,7 +86,8 @@ const PostSlice = createSlice({
       state.posts.loading = true
     })
     builder.addCase(fetchUserPosts.fulfilled, (state,action) => {
-      state.posts.items = action.payload
+      state.posts.items = action.payload.posts
+      state.posts.length = action.payload.length
       state.posts.loading = false
     })
   }

@@ -1,12 +1,11 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useForm } from "react-hook-form";
 import { useAppDispatch } from '../../Hooks/useAppDispatch';
-import { fetchLogin } from '../../Redux/Slices/AuthSlice'
+import { fetchLogin } from '../../Redux/Slices/AuthSlice';
 
-import s from './Login.module.scss'
 import { FormLogin } from '../../Types/FormValues';
+import s from './Login.module.scss';
 
 function Login() {
   // ======== dispatch
@@ -51,7 +50,7 @@ function Login() {
 
       if (data.type === "auth/fetchLogin/fulfilled") {
         localStorage.setItem('token',data.payload.accessToken)
-        return navigate('/flows/all/all')
+        return navigate('/flows/all/all/1')
       }
     } catch (e) {
       alert('При авторизации произошла ошибка')
