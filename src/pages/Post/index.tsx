@@ -120,7 +120,7 @@ function Post() {
                   <Link to={`/user/${post.data?.user._id}/profile`} className={s.post__authorName}>{post.data?.user.nickName}</Link>
                   <div className={s.post__date}>{moment(post.data?.createdAt).locale('ru').format('LLL')}</div>
                 </header>
-                <h2 className={s.post__title}>qwe</h2>
+                <h2 className={s.post__title}>{post.data?.title}</h2>
                 <div className={s.post__img}>
                   <img src={`${process.env.REACT_APP_SERVER_URL}${post.data?.image}`} alt="" />
                 </div>
