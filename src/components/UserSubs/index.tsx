@@ -62,7 +62,7 @@ function UserSubs() {
     :
       <>
         <AuthorsList authors={subs.users} />
-        <Pagination navigatePath={`/user/${id}/${category}`} postsLength={subs.length} />
+        <Pagination navigatePath={`/user/${id}/${category}`} postsLength={subs.users.length} />
       </>
   )
 }
