@@ -29,6 +29,8 @@ import Search from './pages/Search';
 import UserPage from './pages/UserPage';
 import UserSettings from './pages/UserSettings';
 import { fetchAuth } from './Redux/Slices/AuthSlice';
+import HabPosts from './components/HabPosts';
+import HabAuthors from './components/HabAuthors';
 
 function App() {
   // ======== location
@@ -83,7 +85,11 @@ function App() {
           <Route path='authors/:page' element={<HomeAuthorsList />} />
         </Route>
         <Route path='/hab/create' element={<HabCreate />} />
-        <Route path='/hab/:habId/:type/:page' element={<Hab />} />
+        {/* <Route path='/hab/:habId/:type/:page' element={<Hab />} /> */}
+        <Route path='/hab/:habId/' element={<Hab />}>
+          <Route path='posts/:page' element={<HabPosts />} />
+          <Route path='authors/:page' element={<HabAuthors />} />
+        </Route>
         <Route path='/user/:id/' element={<UserPage />}>
           <Route path='profile' element={<UserProfile />} />
           <Route path='posts/:page' element={<UserPosts />} />

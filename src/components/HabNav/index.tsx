@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import React, { ChangeEvent } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { useAppDispatch } from '../../Hooks/useAppDispatch'
 import { useAppSelector } from '../../Hooks/useAppSelector'
 import { fetchHabSubscribe, fetchHabUnSubscribe } from '../../Redux/Slices/AuthSlice'
@@ -23,6 +23,10 @@ interface HabNavProps{
 }
 
 const HabNav: React.FC<HabNavProps> = ({ hab, handleChange }) => {
+  // ======== location
+  const location = useLocation()
+  // ======== location
+  
   // ======== dispatch
   const dispatch = useAppDispatch()
   // ======== dispatch
@@ -32,7 +36,7 @@ const HabNav: React.FC<HabNavProps> = ({ hab, handleChange }) => {
   // ======== current user
 
   // ======== hab category
-  const { habId, type } = useParams()
+  const { habId } = useParams()
   // ======== hab category
 
   // ======== is current user subsctibed
@@ -100,13 +104,13 @@ const HabNav: React.FC<HabNavProps> = ({ hab, handleChange }) => {
           {
             categories.map((el) =>
               <Link key={`${el.categoryEng}`} to={`/hab/${habId}/${el.categoryEng}/1`} className={classNames(s.category__item, {
-                [s.category__item_active]: el.categoryEng === type
+                [s.category__item_active]: el.categoryEng === location.pathname.split('/')[3]
               })}>{el.categoryRu}</Link>
             )
           }
         </div>
         {
-          type === 'authors' &&
+          location.pathname.split('/')[3] === 'authors' &&
           <div className={s.search}>
             <form action="" className={s.search__form}>
               <input type="text" placeholder='Пойск' onChange={handleChange} className={s.search__input} />
