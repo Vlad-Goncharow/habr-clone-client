@@ -13,6 +13,9 @@ import { HabType } from '../../Types/HabType'
 import { PostType } from '../../Types/PostType'
 import { UserType } from '../../Types/UserType'
 import s from './Hab.module.scss'
+import { fetchCustomPosts } from '../../Redux/Slices/PostsSlice'
+import { useAppSelector } from '../../Hooks/useAppSelector'
+import Pagination from '../../components/Pagination'
 
 function Hab() {
   // ======== dispatch
@@ -20,16 +23,14 @@ function Hab() {
   // ======== dispatch
 
   // ======== posts params
-  const { habId,type } = useParams()
+  const { habId,type,page } = useParams()
   // ======== posts params
 
   // ======== loading
   const [loading,setLoading] = React.useState(false)
   // ======== loading
 
-  // ======== posts
-  const [posts,setPosts] = React.useState<PostType[] | []>([])
-  // ======== posts
+  const {posts} = useAppSelector(store => store.posts)
 
   // ======== authors
   const [authors,setAuthors] = React.useState<UserType[] | []>([])
@@ -50,10 +51,7 @@ function Hab() {
   // ======== load hab posts
   const loadPost = async () => {
     try {
-      setLoading(true)
-      const { data } = await axios.get(`/habs/posts/${habId}`)
-      setPosts(data)
-      setLoading(false)
+      dispatch(fetchCustomPosts(`/habs/posts/${habId}/${page}`))
     } catch(e) {
       dispatch(openModal('При загрузке постов произошла ошибка!'))
     }
@@ -91,44 +89,33 @@ function Hab() {
     } else if(type === 'posts'){
       loadPost()
     }
-  }, [debouncedValue, type,habId])
+    window.scrollTo(0, 0)
+  }, [debouncedValue, type,habId,page])
 
   // ======== check post load or authors
   const check = () => {
-    if (type === 'posts') {
-      if (loading) {
+    if (loading) {
+      return (
+        <div className={s.loader}>
+          <Dna
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="dna-loading"
+            wrapperStyle={{}}
+            wrapperClass="dna-wrapper"
+          />
+        </div>
+      )
+    } else {
+      if (type === 'posts') {
         return (
-          <div className={s.loader}>
-            <Dna
-              visible={true}
-              height="80"
-              width="80"
-              ariaLabel="dna-loading"
-              wrapperStyle={{}}
-              wrapperClass="dna-wrapper"
-            />
-          </div>
+          <>
+            <PostsComponents posts={posts.items} />
+            <Pagination postsLength={posts.length} navigatePath={`/hab/${habId}/posts`} />
+          </>
         )
-      } else {
-        return (
-          <PostsComponents posts={posts} />
-        )
-      }
-    } else if (type === 'authors') {
-      if (loading) {
-        return (
-          <div className={s.loader}>
-            <Dna
-              visible={true}
-              height="80"
-              width="80"
-              ariaLabel="dna-loading"
-              wrapperStyle={{}}
-              wrapperClass="dna-wrapper"
-            />
-          </div>
-        )
-      } else {
+      } else if (type === 'authors') {
         return (
           <AuthorsList authors={authors} />
         )

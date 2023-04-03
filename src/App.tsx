@@ -83,7 +83,7 @@ function App() {
           <Route path='authors/:page' element={<HomeAuthorsList />} />
         </Route>
         <Route path='/hab/create' element={<HabCreate />} />
-        <Route path='/hab/:habId/:type' element={<Hab />} />
+        <Route path='/hab/:habId/:type/:page' element={<Hab />} />
         <Route path='/user/:id/' element={<UserPage />}>
           <Route path='profile' element={<UserProfile />} />
           <Route path='posts/:page' element={<UserPosts />} />

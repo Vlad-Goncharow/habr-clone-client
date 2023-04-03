@@ -108,7 +108,7 @@ const HabsList: React.FC = () => {
                               <img src={`${process.env.REACT_APP_SERVER_URL}${hab.image}`} alt="" />
                             </div>
                             <div className={s.item__info}>
-                              <Link to={`/hab/${hab._id}/posts`} className={s.item__title}>{hab.title}</Link>
+                              <Link to={`/hab/${hab._id}/posts/1`} className={s.item__title}>{hab.title}</Link>
                               <p className={s.item__descr}>{hab.descr}</p>
                             </div>
                           </div>

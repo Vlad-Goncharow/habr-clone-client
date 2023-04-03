@@ -18,29 +18,18 @@ const initialState:PostState = {
   }
 }
 
-export const fetchGetAllPosts = createAsyncThunk('posts/fetchGetAllPosts', async (params:any,{rejectWithValue}) => {
+export const fetchCustomPosts = createAsyncThunk('posts/fetchCustomPosts', async (params: any, { rejectWithValue }) => {
   try {
-    const { data } = await axios.get(`/posts/${params.category}/${params.type}/${params.page}`)
-      return data 
-    } catch(err:any) {
-      if (!err.response) {
-        throw err;
-      }
-      return rejectWithValue('При получении постов произошла ошибка!');
-    }
-})
-
-export const fetchUserPosts = createAsyncThunk('posts/fetchUserPosts', async (params:any,{rejectWithValue}) => {
-  try {
-    const { data } = await axios.get(`/user/posts/${params.id}/${params.page}`)
-    return data 
-  } catch(err:any) {
+    const { data } = await axios.get(params)
+    return data
+  } catch (err: any) {
     if (!err.response) {
       throw err;
     }
     return rejectWithValue('При получении постов произошла ошибка!');
   }
 })
+
 
 const PostSlice = createSlice({
   name:'posts',
@@ -73,19 +62,10 @@ const PostSlice = createSlice({
   },
   extraReducers:(builder) => {
     //load posts
-    builder.addCase(fetchGetAllPosts.pending, (state,action) => {
+    builder.addCase(fetchCustomPosts.pending, (state, action) => {
       state.posts.loading = true
     })
-    builder.addCase(fetchGetAllPosts.fulfilled, (state,action) => {
-      state.posts.items = action.payload.posts
-      state.posts.length = action.payload.length
-      state.posts.loading = false
-    })
-
-    builder.addCase(fetchUserPosts.pending, (state,action) => {
-      state.posts.loading = true
-    })
-    builder.addCase(fetchUserPosts.fulfilled, (state,action) => {
+    builder.addCase(fetchCustomPosts.fulfilled, (state, action) => {
       state.posts.items = action.payload.posts
       state.posts.length = action.payload.length
       state.posts.loading = false

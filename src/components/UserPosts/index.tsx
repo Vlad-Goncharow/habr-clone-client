@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useAppDispatch } from '../../Hooks/useAppDispatch'
 import { useAppSelector } from '../../Hooks/useAppSelector'
 import { openModal } from '../../Redux/Slices/ErrorModalSlice'
-import { fetchUserPosts } from '../../Redux/Slices/PostsSlice'
+import { fetchCustomPosts } from '../../Redux/Slices/PostsSlice'
 import Pagination from '../Pagination'
 import PostsComponents from '../PostsComponents'
 import s from './UserPosts.module.scss'
@@ -29,7 +29,7 @@ function UserPosts() {
   // ======== load posts
   const loadPost = async () => {
     try {
-      dispatch(fetchUserPosts({ id, page }))
+      dispatch(fetchCustomPosts(`/user/posts/${id}/${page}`))
     } catch (e) {
       dispatch(openModal('При загрузки постов произошла ошибка'))
       navigate(-1)
@@ -38,6 +38,7 @@ function UserPosts() {
 
   React.useEffect(()=>{
     loadPost()
+    window.scrollTo(0, 0)
   },[id,page])
   // ======== load posts
 

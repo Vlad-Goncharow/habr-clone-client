@@ -99,7 +99,7 @@ const HabNav: React.FC<HabNavProps> = ({ hab, handleChange }) => {
         <div className={s.category}>
           {
             categories.map((el) =>
-              <Link key={`${el.categoryEng}`} to={`/hab/${habId}/${el.categoryEng}`} className={classNames(s.category__item, {
+              <Link key={`${el.categoryEng}`} to={`/hab/${habId}/${el.categoryEng}/1`} className={classNames(s.category__item, {
                 [s.category__item_active]: el.categoryEng === type
               })}>{el.categoryRu}</Link>
             )

@@ -57,7 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({ category }) => {
                     <img src={`${process.env.REACT_APP_SERVER_URL}${hab.image}`} alt="" />
                   </div>
                   <div className={s.hab__info}>
-                    <Link to={`/hab/${hab._id}/posts`} className={s.hab__title}>{hab.title}</Link>
+                    <Link to={`/hab/${hab._id}/posts/1`} className={s.hab__title}>{hab.title}</Link>
                     <div className={s.hab__stats}>
                       <span>{hab.authors.length} авторов</span>
                     </div>

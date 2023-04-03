@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useAppDispatch } from '../../Hooks/useAppDispatch'
 import { useAppSelector } from '../../Hooks/useAppSelector'
 import { openModal } from '../../Redux/Slices/ErrorModalSlice'
-import { fetchGetAllPosts } from '../../Redux/Slices/PostsSlice'
+import { fetchCustomPosts } from '../../Redux/Slices/PostsSlice'
 import Pagination from '../Pagination'
 import PostsComponents from '../PostsComponents'
 import PostsNav from '../PostsNav'
@@ -25,15 +25,16 @@ function HomePosts() {
 
   // ======== load post or news
   const loadPostOrNews = async () => {
-    const data = await dispatch(fetchGetAllPosts({ category, type, page }))
+    const data = await dispatch(fetchCustomPosts(`/posts/${category}/${type}/${page}`))
 
-    if (data.type === 'posts/fetchGetAllPosts/rejected') {
+    if (data.type === 'posts/fetchCustomPosts/rejected') {
       dispatch(openModal(data.payload))
     }
   }
 
   React.useEffect(() => {
     if (type === 'all' || type === 'news') {
+      window.scrollTo(0, 0)
       loadPostOrNews()
     }
   }, [ type, page, category])
