@@ -1,26 +1,44 @@
 import React from 'react'
-import axios from '../../axios'
 import PostsComponents from '../../components/PostsComponents'
-import { PostType } from '../../Types/PostType'
 import s from './Search.module.scss'
+import { useAppDispatch } from '../../Hooks/useAppDispatch'
+import { fetchCustomPosts } from '../../Redux/Slices/PostsSlice'
+import { useParams } from 'react-router-dom'
+import { useAppSelector } from '../../Hooks/useAppSelector'
+import Pagination from '../../components/Pagination'
 
 function Search() {
   // ======== input ref
   const inputRef = React.useRef<any>()
   // ======== input ref
 
-  // ======== searched post
-  const [posts,setPosts] = React.useState<PostType[] | []>([])
-  // ======== searched post
+  // ======== page 
+  const {page} = useParams()
+  // ======== page 
+
+  // ======== posts
+  const {posts} = useAppSelector(store => store.posts)
+  // ======== posts
+
+  // ======== dispatch
+  const dispatch = useAppDispatch()
+  // ======== dispatch
 
   // ======== search
-  const formSubmit = async (e:any) => {
+  const formSubmit = React.useCallback(async (e: any) => {
     e.preventDefault()
-    const { data } = await axios.post('/posts/search', { title: inputRef.current.value})
-    setPosts(data);
-    inputRef.current.value = ''
+    dispatch(fetchCustomPosts(`/posts/search/${inputRef.current.value}/${page}`))
     inputRef.current.focus()
-  }
+  },[page])
+
+  React.useEffect(() => {
+    inputRef.current.focus()
+
+    if (inputRef.current.value){
+      dispatch(fetchCustomPosts(`/posts/search/${inputRef.current.value}/${page}`))
+      inputRef.current.focus()
+    }
+  }, [page])
   // ======== search
 
   return (
@@ -36,9 +54,17 @@ function Search() {
               </svg>
             </div>
           </form>
-          <div className={s.posts}>
-            <PostsComponents posts={posts} />
-          </div>
+          {
+            inputRef.current?.value.length > 0 ?
+              posts.loading === false &&
+              <div className={s.posts}>
+                <PostsComponents posts={posts.items} />
+                <Pagination postsLength={posts.length} navigatePath={'/search'} />
+              </div>
+            :
+              null
+          }
+          
         </div>
       </div>
     </div>

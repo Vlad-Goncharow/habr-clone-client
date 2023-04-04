@@ -78,7 +78,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/all' element={<Posts />} />
         <Route path='/post/create' element={<Create />} />
-        <Route path='/search' element={<Search />} />
+        <Route path='/search/:page' element={<Search />} />
         <Route path='/flows/:category/' element={<Posts />} >
           <Route path=':type/:page' element={<HomePosts />} />
           <Route path='habs/:page' element={<HabsList />} />
