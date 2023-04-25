@@ -56,8 +56,8 @@ const Register: React.FC = () => {
         })
       }
 
-      if (data.type === "auth/fetchLogin/fulfilled") {
-        return navigate('/flows/all/all')
+      if (data.type === "auth/fetchRegister/fulfilled") {
+        navigate('/flows/all/all/1')
       }
     } catch (e) {
       alert('При регистрации произошла ошибка, попробуйте еще')

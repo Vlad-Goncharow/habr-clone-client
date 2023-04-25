@@ -3,11 +3,15 @@ import PostsComponents from '../../components/PostsComponents'
 import s from './Search.module.scss'
 import { useAppDispatch } from '../../Hooks/useAppDispatch'
 import { fetchCustomPosts } from '../../Redux/Slices/PostsSlice'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useAppSelector } from '../../Hooks/useAppSelector'
 import Pagination from '../../components/Pagination'
 
 function Search() {
+  // ======== navigate
+  const navigate = useNavigate()
+  // ======== navigate
+
   // ======== input ref
   const inputRef = React.useRef<any>()
   // ======== input ref
@@ -27,6 +31,7 @@ function Search() {
   // ======== search
   const formSubmit = React.useCallback(async (e: any) => {
     e.preventDefault()
+    navigate('/search/1')
     dispatch(fetchCustomPosts(`/posts/search/${inputRef.current.value}/${page}`))
     inputRef.current.focus()
   },[page])

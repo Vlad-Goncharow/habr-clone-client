@@ -128,7 +128,7 @@ const SecondStepPost: React.FC<propTypes> = ({ setCreateStep, text, titleValue }
           tags: watch('tags').split(' '),
           habs: habs
         })
-        navigate('/flows/all/all')
+        navigate('/flows/all/all/1')
       }
     } else {
       dispatch(openModal('Вы не заполнили хабы или теги'))

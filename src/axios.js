@@ -3,8 +3,11 @@ import axios from 'axios';
 export const API_URL = process.env.REACT_APP_SERVER_URL;
 
 const instance = axios.create({
-  withCredentials: true,
   baseURL: API_URL,
+  withCredentials:true,
+  headers:{
+    'Access-Control-Allow-Origin':'*'
+  }
 });
 
 instance.interceptors.request.use((config) => {

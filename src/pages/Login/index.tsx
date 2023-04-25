@@ -41,7 +41,6 @@ function Login() {
   const loginSubmit = async (values: FormLogin) => {
     try {
       const data: any = await dispatch(fetchLogin(values))
-
       if (data.type === "auth/fetchLogin/rejected") {
         return data.payload.forEach((err: any) => {
           setError(err.param, { type: 'custom', message: err.msg });

@@ -8,9 +8,6 @@ import axios from '../../axios'
 import HabNav from '../../components/HabNav'
 import Sidebar from '../../components/Sidebar'
 import s from './Hab.module.scss'
-import { fetchCustomPosts } from '../../Redux/Slices/PostsSlice'
-import { useAppSelector } from '../../Hooks/useAppSelector'
-import Pagination from '../../components/Pagination'
 
 function Hab() {
   // ======== dispatch

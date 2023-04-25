@@ -8,7 +8,6 @@ import PostComments from '../../components/PostComments';
 import Sidebar from '../../components/Sidebar';
 import s from './Post.module.scss';
 
-
 import classNames from 'classnames';
 import draftToHtml from 'draftjs-to-html';
 import parse from 'html-react-parser';
@@ -149,7 +148,7 @@ function Post() {
                     {
                       post.data?.habs.map((el: HabType) =>
                         <li key={`${el}`}>
-                          <Link to={`/hab/${el._id}/posts`}>{el.title}</Link>
+                          <Link to={`/hab/${el._id}/posts/1`}>{el.title}</Link>
                         </li>
                       )
                     }

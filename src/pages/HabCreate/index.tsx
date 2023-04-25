@@ -91,7 +91,7 @@ function HabCreate() {
       image:imageUrl
     })
 
-    navigate(`/hab/${data._id}/posts`)
+    navigate(`/hab/${data._id}/posts/1`)
   }
   // ======== create hab
 

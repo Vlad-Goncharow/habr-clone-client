@@ -31,6 +31,7 @@ import UserSettings from './pages/UserSettings';
 import { fetchAuth } from './Redux/Slices/AuthSlice';
 import HabPosts from './components/HabPosts';
 import HabAuthors from './components/HabAuthors';
+import axios from 'axios';
 
 function App() {
   // ======== location
@@ -62,8 +63,19 @@ function App() {
     }
   }
 
+  const qwe = async () => {
+    const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/all/all/1`,{
+      headers: {
+        "Referrer-Policy": "no-referrer",
+        "Access-Control-Allow-Credentials": true
+      }
+    })
+    console.log(data)
+  }
+
   React.useEffect(() => {
     auth()
+    // qwe()
   },[])
   // ======== get auth user
 
